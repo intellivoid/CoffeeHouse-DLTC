@@ -6,7 +6,9 @@ import nltk
 import string
 
 from nltk.tokenize import WordPunctTokenizer, sent_tokenize, word_tokenize
+
 nltk.download('punkt', quiet=True)
+
 
 class Document(object):
     """ Class representing a document that the keywords are extracted from """

@@ -58,6 +58,7 @@ class DLTC(object):
         :return: History object
         """
 
+        # noinspection DuplicatedCode
         if not self.word2vec_model:
             raise RuntimeError('word2vec model is not trained. ' + \
                                'Run train_word2vec() first.')
