@@ -34,7 +34,8 @@ setup(
         'scikit-learn~=0.21.3',
         'keras~=2.2.5',
         'h5py~=2.9',
-        'tensorflow~=1.14.0'
+        'tensorflow~=1.14.0',
+        'six'
     ],
 
     entry_points='''
