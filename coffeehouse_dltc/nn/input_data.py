@@ -4,7 +4,6 @@ import os
 import threading
 
 import numpy as np
-from gensim.models import Word2Vec
 
 from coffeehouse_dltc.base.document import Document
 from coffeehouse_dltc.config import BATCH_SIZE, SAMPLE_LENGTH

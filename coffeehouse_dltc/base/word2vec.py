@@ -1,5 +1,4 @@
 from __future__ import print_function, unicode_literals
-
 import os
 import six
 import numpy as np
@@ -9,7 +8,8 @@ from gensim.models import Word2Vec
 from sklearn.preprocessing import StandardScaler
 
 from coffeehouse_dltc.base.document import Document
-from coffeehouse_dltc.config import EMBEDDING_SIZE, WORD2VEC_WORKERS, MIN_WORD_COUNT, WORD2VEC_CONTEXT
+from coffeehouse_dltc.config import EMBEDDING_SIZE, WORD2VEC_WORKERS, MIN_WORD_COUNT, \
+    WORD2VEC_CONTEXT
 from coffeehouse_dltc.utils import get_documents, save_to_disk
 
 

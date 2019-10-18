@@ -16,7 +16,8 @@ from coffeehouse_dltc.nn.models import get_nn_model
 from coffeehouse_dltc.utils import save_to_disk, load_from_disk
 
 
-class DLTC(object):
+# noinspection DuplicatedCode
+class Magpie(object):
 
     def __init__(self, keras_model=None, word2vec_model=None, scaler=None,
                  labels=None):
@@ -58,26 +59,20 @@ class DLTC(object):
         :return: History object
         """
 
-        # noinspection DuplicatedCode
         if not self.word2vec_model:
-            raise RuntimeError('word2vec model is not trained. ' + \
-                               'Run train_word2vec() first.')
+            raise RuntimeError('word2vec model is not trained. ' + 'Run train_word2vec() first.')
 
         if not self.scaler:
-            raise RuntimeError('The scaler is not trained. ' + \
-                               'Run fit_scaler() first.')
+            raise RuntimeError('The scaler is not trained. ' + 'Run fit_scaler() first.')
 
         if not os.path.isdir(train_dir):
-            raise ValueError('The training directory ' + train_dir + \
-                             ' does not exist')
+            raise ValueError('The training directory ' + train_dir + ' does not exist')
 
         if test_dir and not os.path.isdir(test_dir):
-            raise ValueError('The test directory ' + test_dir + \
-                             ' does not exist')
+            raise ValueError('The test directory ' + test_dir + ' does not exist')
 
         if self.keras_model:
-            print('WARNING! Overwriting already trained Keras model.',
-                  file=sys.stderr)
+            print('WARNING! Overwriting already trained Keras model.', file=sys.stderr)
 
         self.labels = vocabulary
         self.keras_model = get_nn_model(
@@ -128,24 +123,19 @@ class DLTC(object):
         """
 
         if not self.word2vec_model:
-            raise RuntimeError('word2vec model is not trained. ' + \
-                               'Run train_word2vec() first.')
+            raise RuntimeError('word2vec model is not trained. ' + 'Run train_word2vec() first.')
 
         if not self.scaler:
-            raise RuntimeError('The scaler is not trained. ' + \
-                               'Run fit_scaler() first.')
+            raise RuntimeError('The scaler is not trained. ' + 'Run fit_scaler() first.')
 
         if not os.path.isdir(train_dir):
-            raise ValueError('The training directory ' + train_dir + \
-                             ' does not exist')
+            raise ValueError('The training directory ' + train_dir + ' does not exist')
 
         if test_dir and not os.path.isdir(test_dir):
-            raise ValueError('The test directory ' + test_dir + \
-                             ' does not exist')
+            raise ValueError('The test directory ' + test_dir + ' does not exist')
 
         if self.keras_model:
-            print('WARNING! Overwriting already trained Keras model.',
-                  file=sys.stderr)
+            print('WARNING! Overwriting already trained Keras model.', file=sys.stderr)
 
         self.labels = vocabulary
         self.keras_model = get_nn_model(
@@ -262,8 +252,7 @@ class DLTC(object):
         :return: fitted scaler object
         """
         if not self.word2vec_model:
-            raise ValueError('word2vec model is not trained. ' + \
-                             'Run train_word2vec() first.')
+            raise ValueError('word2vec model is not trained. Run train_word2vec() first.')
 
         if self.scaler:
             print('WARNING! Overwriting already fitted scaler.',
@@ -276,8 +265,7 @@ class DLTC(object):
     def save_scaler(self, filepath, overwrite=False):
         """ Save the scaler object to a file """
         if not self.scaler:
-            raise ValueError("Can't save the scaler, " + \
-                             "it has not been trained yet")
+            raise ValueError("Can't save the scaler, it has not been trained yet")
         save_to_disk(filepath, self.scaler, overwrite=overwrite)
 
     def load_scaler(self, filepath):
@@ -287,8 +275,7 @@ class DLTC(object):
     def save_word2vec_model(self, filepath, overwrite=False):
         """ Save the word2vec model to a file """
         if not self.word2vec_model:
-            raise ValueError("Can't save the word2vec model, " + \
-                             "it has not been trained yet")
+            raise ValueError("Can't save the word2vec model, it has not been trained yet")
         save_to_disk(filepath, self.word2vec_model, overwrite=overwrite)
 
     def load_word2vec_model(self, filepath):
@@ -298,8 +285,7 @@ class DLTC(object):
     def save_model(self, filepath):
         """ Save the keras NN model to a HDF5 file """
         if not self.keras_model:
-            raise ValueError("Can't save the model, " \
-                             "it has not been trained yet")
+            raise ValueError("Can't save the model, it has not been trained yet")
 
         if os.path.exists(filepath):
             raise ValueError("File " + filepath + " already exists!")

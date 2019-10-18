@@ -1,6 +1,7 @@
 from __future__ import division
 
 try:
+    # noinspection PyPep8Naming
     import cPickle as pickle
 except ImportError:
     import pickle

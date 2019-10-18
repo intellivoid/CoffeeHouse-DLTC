@@ -1,5 +1,4 @@
-from keras.layers import Input, Dense, GRU, Dropout, BatchNormalization, \
-                         MaxPooling1D, Conv1D, Flatten, Concatenate
+from keras.layers import Input, Dense, GRU, Dropout, BatchNormalization, MaxPooling1D, Conv1D, Flatten, Concatenate
 from keras.models import Model
 
 from coffeehouse_dltc.config import SAMPLE_LENGTH
@@ -14,6 +13,7 @@ def get_nn_model(nn_model, embedding, output_length):
         raise ValueError("Unknown NN type: {}".format(nn_model))
 
 
+# noinspection PyPep8Naming
 def cnn(embedding_size, output_length):
     """ Create and return a keras model of a CNN """
 
@@ -55,6 +55,7 @@ def cnn(embedding_size, output_length):
 
 def rnn(embedding_size, output_length):
     """ Create and return a keras model of a RNN """
+    # noinspection PyPep8Naming
     HIDDEN_LAYER_SIZE = 256
 
     inputs = Input(shape=(SAMPLE_LENGTH, embedding_size))

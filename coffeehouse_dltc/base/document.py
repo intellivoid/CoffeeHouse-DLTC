@@ -7,7 +7,7 @@ import string
 
 from nltk.tokenize import WordPunctTokenizer, sent_tokenize, word_tokenize
 
-nltk.download('punkt', quiet=True)
+nltk.download('punkt', quiet=True)  # make sure it's downloaded before using
 
 
 class Document(object):

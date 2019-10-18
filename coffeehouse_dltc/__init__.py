@@ -1,1 +1,1 @@
-from .main import DLTC
+from .main import Magpie
