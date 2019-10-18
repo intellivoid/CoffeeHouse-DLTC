@@ -17,7 +17,7 @@ from coffeehouse_dltc.utils import save_to_disk, load_from_disk
 
 
 # noinspection DuplicatedCode
-class Magpie(object):
+class DLTC(object):
 
     def __init__(self, keras_model=None, word2vec_model=None, scaler=None,
                  labels=None):
