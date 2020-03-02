@@ -67,7 +67,11 @@ def build_x_and_y(filenames, file_directory, **kwargs):
     x_matrix = np.zeros((len(filenames), SAMPLE_LENGTH, word2vec_model.vector_size))
     y_matrix = np.zeros((len(filenames), len(label_indices)), dtype=np.bool_)
 
+    print(filenames)
     for doc_id, fname in enumerate(filenames):
+        print(doc_id)
+        print(fname)
+        print()
         doc = Document(doc_id, os.path.join(file_directory, fname + '.txt'))
         words = doc.get_all_words()[:SAMPLE_LENGTH]
 
