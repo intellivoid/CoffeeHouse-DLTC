@@ -67,10 +67,10 @@ class Configuration(object):
 
         labels_file_name = "{0}.labels".format(os.path.dirname(temporary_path))
 
-        with open(labels_file_name, mode='wt', encoding='utf-8') as labels_file:
-            for labels in self.classifier_labels():
-                labels_file.write('\n'.join(str(line) for line in labels))
-            labels_file.close()
+        with open(labels_file_name, 'w+', encoding='utf8') as f:
+            for item in self.classifier_labels():
+                f.write("%s\n" % item)
+            f.close()
 
         print("Processing classifiers")
         for classifier_name, classifier_data_file in self.classifications.items():
