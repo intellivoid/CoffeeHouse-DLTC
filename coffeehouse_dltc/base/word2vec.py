@@ -105,7 +105,7 @@ def train_word2vec(doc_directory, vec_dim=EMBEDDING_SIZE):
             self.dirname = dirname
 
         def __iter__(self):
-            files = {filename for filename in os.listdir(self.dirname)}
+            files = {filename[:-4] for filename in os.listdir(self.dirname)}
             for doc_id, fname in enumerate(files):
                 d = Document(doc_id, os.path.join(self.dirname, fname + '.txt'))
                 for sentence in d.read_sentences():

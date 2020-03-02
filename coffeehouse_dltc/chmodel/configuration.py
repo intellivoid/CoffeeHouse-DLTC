@@ -113,7 +113,7 @@ class Configuration(object):
         # noinspection SpellCheckingInspection
         dltc = DLTC()
         dltc.init_word_vectors(
-            directory_structure,
+            path.join(directory_structure, 'model_data'),
             vec_dim=self.configuration['training_properties']['vec_dim']
         )
         dltc.train(
