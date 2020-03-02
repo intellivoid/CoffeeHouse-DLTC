@@ -2,6 +2,7 @@ import os
 import json
 import shutil
 from os import path
+
 from coffeehouse_dltc import DLTC
 
 
@@ -58,26 +59,22 @@ class Configuration(object):
         if path.exists(temporary_path):
             shutil.rmtree(temporary_path)
 
-        data_path = path.join(temporary_path, os.path.dirname(temporary_path))
+        data_path = path.join(temporary_path, "model_data")
         os.mkdir(temporary_path)
         print("Created directory '{0}'".format(temporary_path))
         os.mkdir(data_path)
         print("Created directory '{0}'".format(data_path))
 
         labels_file_name = "{0}.labels".format(os.path.dirname(temporary_path))
-        labels_file = open(path.join(temporary_path, labels_file_name), "w+", encoding="utf8")
-        classifier_labels = []
-        is_first = True
+
+        with open(labels_file_name, mode='wt', encoding='utf-8') as labels_file:
+            for labels in self.classifier_labels():
+                labels_file.write('\n'.join(str(line) for line in labels))
+            labels_file.close()
 
         print("Processing classifiers")
         for classifier_name, classifier_data_file in self.classifications.items():
-            classifier_labels.append(classifier_name)
             contents = self.classifier_contents(classifier_name)
-            if not is_first:
-                labels_file.write("\n{0}".format(classifier_name))
-            else:
-                labels_file.write(classifier_name)
-                is_first = True
             print("Processing label '{0}'".format(classifier_name))
 
             current_value = 0
@@ -92,9 +89,6 @@ class Configuration(object):
                     label_file.close()
                 current_value += 1
             print("Processed label '{0}'".format(classifier_name))
-
-        print("Wrote file {0}".format(path.join(temporary_path,  labels_file_name)))
-        labels_file.close()
 
         print("Structure created at '{0}'".format(temporary_path))
         return temporary_path
