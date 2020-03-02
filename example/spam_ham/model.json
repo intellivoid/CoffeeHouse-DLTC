@@ -1,13 +1,15 @@
 {
     "model": {
         "name": "Spam Ham",
+        "model_name": "spam_ham",
         "author": "Zi Xing",
         "version": "1.0.0.0",
         "description": "Model for predicting messages which contains spam or ham"
     },
     "training_properties":{
-        "epoch": 1,
-        "vec_dim": 100
+        "epoch": 5,
+        "vec_dim": 100,
+        "test_ratio": 0.2
     },
     "classification": [
         {"l": "spam", "f": "spam.dat"},

@@ -99,32 +99,50 @@ class Configuration(object):
         print("Preparing output directory")
         output_path = "{0}_output".format(self.src)
 
-        embeddings_path = path.join(output_path, "embeddings")
-        scaler_path = path.join(output_path, "scaler")
-        model_file_path = path.join(output_path, "model.chm")
-        labels_file_path = path.join(output_path, "labels.json")
+        embeddings_path = path.join(output_path, "{0}.che".format(self.configuration['model']['model_name']))
+        scaler_path = path.join(output_path, "{0}.chs".format(self.configuration['model']['model_name']))
+        model_file_path = path.join(output_path, "{0}.chm".format(self.configuration['model']['model_name']))
+        labels_file_path = path.join(output_path, "{0}.chl".format(self.configuration['model']['model_name']))
 
         if path.exists(output_path):
             shutil.rmtree(output_path)
 
         os.mkdir(output_path)
 
-        print("Training model")
+        print("Initializing CoffeeHouse DLTC Server")
         # noinspection SpellCheckingInspection
         dltc = DLTC()
-        dltc.init_word_vectors(
+
+        print("Creating word to vectors model")
+        dltc.train_word2vec(
             path.join(directory_structure, 'model_data'),
             vec_dim=self.configuration['training_properties']['vec_dim']
         )
+
+        print("Fitting Scalers")
+        dltc.fit_scaler(path.join(directory_structure, 'model_data'))
+
+        print("Training model")
         dltc.train(
             path.join(directory_structure, 'model_data'),
-            self.classifier_labels(), epochs=self.configuration['training_properties']['epoch']
+            self.classifier_labels(),
+            epochs=self.configuration['training_properties']['epoch'],
+            test_ratio=self.configuration['training_properties']['test_ratio'],
+            verbose=2
         )
 
         print("Saving data to disk")
         dltc.save_word2vec_model(embeddings_path)
+        print("Created file '{0}'".format(embeddings_path))
         dltc.save_scaler(scaler_path)
+        print("Created file '{0}'".format(scaler_path))
         dltc.save_model(model_file_path)
+        print("Created file '{0}'".format(model_file_path))
         with open(labels_file_path, 'w', encoding='utf-8') as f:
             json.dump(self.classifier_labels(), f, ensure_ascii=False, indent=4)
-        print("Done")
+        print("Created file '{0}'".format(labels_file_path))
+
+        print("Cleaning up")
+        if path.exists(directory_structure):
+            shutil.rmtree(directory_structure)
+        print("Model created at '{0}".format(output_path))
