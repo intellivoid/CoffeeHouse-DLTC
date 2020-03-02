@@ -8,7 +8,7 @@
     "training_properties":{
         "epoch": 5
     },
-    "classifcation": [
+    "classification": [
         {"l": "spam", "f": "spam.dat"},
         {"l": "ham", "f": "ham.dat"}
     ]
