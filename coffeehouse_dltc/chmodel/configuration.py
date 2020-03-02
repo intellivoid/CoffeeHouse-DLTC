@@ -1,4 +1,6 @@
+import os
 import json
+import shutil
 from os import path
 
 
@@ -41,3 +43,29 @@ class Configuration(object):
                 return f.read().splitlines()
         else:
             raise ValueError("The classification label '{0}' is not defined in the configuration".format(classification_name))
+
+    def create_structure(self):
+        temporary_path = "{0}_tmp".format(self.src)
+        if path.exists(temporary_path):
+            shutil.rmtree(temporary_path)
+
+        data_path = path.join(temporary_path, "_data")
+        os.mkdir(temporary_path)
+        os.mkdir(data_path)
+
+        classifier_labels = []
+        for classifier_name, classifier_data_file in self.classifications:
+            classifier_labels.append(classifier_name)
+            contents = self.classifier_contents(classifier_name)
+
+            current_value = 0
+            for value in contents:
+                content_file_path = "{0}_{1}.txt".format(classifier_name, current_value)
+                label_file_path = "{0}_{1}.lab".format(classifier_name, current_value)
+                with open(path.join(data_path, content_file_path), "w+") as content_file:
+                    content_file.write(value)
+                    content_file.close()
+                with open(path.join(data_path, label_file_path), "w+") as label_file:
+                    label_file.write(classifier_name)
+                    label_file.close()
+                current_value += 1
