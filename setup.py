@@ -18,7 +18,7 @@ setup(
     keywords='multi-label classification nlp neural networks deep learning',
     packages=find_packages(exclude=['tests']),
     install_requires=[
-        'nltk~=1.0.0',
+        'nltk',
         'numpy~=1.17',
         'scipy~=1.3.1',
         'gensim~=3.8.0',
