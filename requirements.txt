@@ -1,0 +1,10 @@
+cython
+nltk
+numpy
+scipy
+gensim
+scikit-learn
+keras
+h5py
+tensorflow
+six
