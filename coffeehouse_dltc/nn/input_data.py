@@ -39,7 +39,7 @@ def get_data_for_model(train_dir, labels, test_dir=None, nn_model=None,
         filename_it = FilenameIterator(train_dir, batch_size)
         train_data = iterate_over_batches(filename_it, **kwargs)
     else:
-        train_files = {filename[:-4] for filename in os.listdir(train_dir)}
+        train_files = {filename for filename in os.listdir(train_dir)}
         train_data = build_x_and_y(train_files, train_dir, **kwargs)
 
     test_data = None
@@ -51,7 +51,6 @@ def get_data_for_model(train_dir, labels, test_dir=None, nn_model=None,
 
 
 def build_x_and_y(filenames, file_directory, **kwargs):
-    print(file_directory)
     """
     Given file names and their directory, build (X, y) data matrices
     :param filenames: iterable of strings showing file ids (no extension)
