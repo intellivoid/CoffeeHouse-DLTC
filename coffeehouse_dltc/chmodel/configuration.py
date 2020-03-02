@@ -112,13 +112,12 @@ class Configuration(object):
         print("Training model")
         # noinspection SpellCheckingInspection
         dltc = DLTC()
-        dltc.train_word2vec(
+        dltc.init_word_vectors(
             path.join(directory_structure, 'model_data'),
             vec_dim=self.configuration['training_properties']['vec_dim']
         )
-        dltc.fit_scaler(path.join(directory_structure, 'model_data'))
         dltc.train(
-            directory_structure,
+            path.join(directory_structure, 'model_data'),
             self.classifier_labels(), epochs=self.configuration['training_properties']['epoch']
         )
 
