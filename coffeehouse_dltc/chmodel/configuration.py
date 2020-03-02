@@ -33,4 +33,11 @@ class Configuration(object):
                     pass
             return i + 1
         else:
-            raise ValueError("The classification '{0}' is not defined in the configuration".format(classification_name))
+            raise ValueError("The classification label '{0}' is not defined in the configuration".format(classification_name))
+
+    def classifier_contents(self, classification_name):
+        if classification_name in self.classifications:
+            with open(self.classifications[classification_name], 'r', encoding="utf8") as f:
+                return f.read().splitlines()
+        else:
+            raise ValueError("The classification label '{0}' is not defined in the configuration".format(classification_name))
