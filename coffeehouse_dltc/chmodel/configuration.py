@@ -77,6 +77,7 @@ class Configuration(object):
                 labels_file.write("\n{0}".format(classifier_name))
             else:
                 labels_file.write(classifier_name)
+                is_first = True
             print("Processing label '{0}'".format(classifier_name))
 
             current_value = 0
