@@ -53,12 +53,12 @@ class Configuration(object):
             shutil.rmtree(temporary_path)
 
         data_path = path.join(temporary_path, "_data")
-        labels_file = open(path.join(temporary_path, "labels.txt"), "w+", encoding="utf8")
         os.mkdir(temporary_path)
         print("Created directory '{0}'".format(temporary_path))
         os.mkdir(data_path)
         print("Created directory '{0}'".format(data_path))
 
+        labels_file = open(path.join(temporary_path, "labels.txt"), "w+", encoding="utf8")
         classifier_labels = []
         is_first = True
 
