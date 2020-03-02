@@ -28,7 +28,7 @@ class Configuration(object):
 
     def classifier_range(self, classification_name):
         if classification_name in self.classifications:
-            with open(self.classifications[classification_name]) as f:
+            with open(self.classifications[classification_name], 'r', encoding="utf8") as f:
                 for i, l in enumerate(f):
                     pass
             return i + 1
