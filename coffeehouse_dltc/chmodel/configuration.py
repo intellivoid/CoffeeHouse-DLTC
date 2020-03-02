@@ -65,9 +65,9 @@ class Configuration(object):
         os.mkdir(data_path)
         print("Created directory '{0}'".format(data_path))
 
-        labels_file_name = "{0}.labels".format(os.path.dirname(temporary_path))
+        labels_file_path = path.join(temporary_path, "model_data.labels")
 
-        with open(labels_file_name, 'w+', encoding='utf8') as f:
+        with open(labels_file_path, 'w+', encoding='utf8') as f:
             for item in self.classifier_labels():
                 f.write("%s\n" % item)
             f.close()
