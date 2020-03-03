@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='coffeehouse_dltc',
-    version='1.0.0',
+    version='1.0.1',
     description='Deep Learning Text Classification Engine',
     url='https://github.com/Intellivoid/CoffeeHouse-DLTC',
     author='Zi Xing Narrakas',
@@ -11,7 +11,7 @@ setup(
         #   3 - Alpha
         #   4 - Beta
         #   5 - Production/Stable
-        'Development Status :: 3 - Internal/Alpha',
+        'Development Status :: 5 - Production/Stable',
         'Topic :: Text Processing',
         'Programming Language :: Python :: 3',
     ],
