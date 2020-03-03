@@ -3,6 +3,7 @@ from __future__ import unicode_literals, print_function, division
 import math
 import os
 import sys
+import json
 from six import string_types
 
 import keras.models
@@ -19,24 +20,40 @@ from coffeehouse_dltc.utils import save_to_disk, load_from_disk
 # noinspection DuplicatedCode
 class DLTC(object):
 
-    def __init__(self, keras_model=None, word2vec_model=None, scaler=None,
-                 labels=None):
-        self.labels = labels
+    def __init__(self):
+        self.labels = None
+        self.keras_model = None
+        self.word2vec_model = None
+        self.scaler = None
 
-        if isinstance(keras_model, string_types):
-            self.load_model(keras_model)
-        else:
-            self.keras_model = keras_model
+    def load_model(self, model_directory):
+        if not os.path.exists(model_directory):
+            raise FileNotFoundError("The model directory does not exist")
 
-        if isinstance(word2vec_model, string_types):
-            self.load_word2vec_model(word2vec_model)
-        else:
-            self.word2vec_model = word2vec_model
+        embeddings_path = os.path.join(model_directory, "{0}.che".format(os.path.basename(model_directory)))
+        scaler_path = os.path.join(model_directory, "{0}.chs".format(os.path.basename(model_directory)))
+        model_file_path = os.path.join(model_directory, "{0}.chm".format(os.path.basename(model_directory)))
+        labels_file_path = os.path.join(model_directory, "{0}.chl".format(os.path.basename(model_directory)))
 
-        if isinstance(scaler, string_types):
-            self.load_scaler(scaler)
-        else:
-            self.scaler = scaler
+        if not os.path.exists(embeddings_path):
+            raise FileNotFoundError("The embeddings model was not found (.che)")
+
+        if not os.path.exists(scaler_path):
+            raise FileNotFoundError("The scaler model was not found (.chs)")
+
+        if not os.path.exists(model_file_path):
+            raise FileNotFoundError("The classification model was not found (.chm)")
+
+        if not os.path.exists(labels_file_path):
+            raise FileNotFoundError("The labels file was not found (.chl)")
+
+        # Read the labels file
+        with open(labels_file_path, 'r') as f:
+            self.labels = json.load(f)
+
+        self.load_model(model_file_path)
+        self.load_word2vec_model(embeddings_path)
+        self.load_scaler(scaler_path)
 
     def train(self, train_dir, vocabulary, test_dir=None, callbacks=None,
               nn_model=NN_ARCHITECTURE, batch_size=BATCH_SIZE, test_ratio=0.0,
