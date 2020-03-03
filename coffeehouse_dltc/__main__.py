@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from __future__ import unicode_literals
 from coffeehouse_dltc.chmodel.configuration import Configuration
+from coffeehouse_dltc.main import DLTC
 import sys
 import os
 
@@ -12,6 +13,8 @@ def _real_main(argv=None):
         _model_info(argv)
     if argv[1] == '--train-model':
         _train_model(argv)
+    if argv[1] == '--test-model':
+        _test_model(argv)
 
 
 def _help_menu(argv=None):
@@ -22,6 +25,23 @@ def _help_menu(argv=None):
         "   --test-model <model_directory>\n"
     )
     sys.exit()
+
+
+def _test_model(argv=None):
+    directory_model_input = os.path.join(os.getcwd(), argv[2])
+
+    if not os.path.exists(directory_model_input):
+        print("\nERROR: The directory '{0}' does not exist".format(directory_model_input))
+        sys.exit()
+
+    print("Loading model")
+    dltc = DLTC()
+    dltc.load_model_cluster(directory_model_input)
+    print("Ready\n")
+
+    while True:
+        input_text = input("> ")
+        print(dltc.predict_from_text(input_text))
 
 
 def _train_model(argv=None):
@@ -36,6 +56,7 @@ def _train_model(argv=None):
 
     print("\n\n----- Model Training Started -----\n")
     configuration.train_model()
+
 
 def _model_info(argv=None):
     directory_structure_input = os.path.join(os.getcwd(), argv[2])
