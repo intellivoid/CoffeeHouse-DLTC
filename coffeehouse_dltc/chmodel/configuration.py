@@ -97,7 +97,7 @@ class Configuration(object):
         directory_structure = self.create_structure()
 
         print("Preparing output directory")
-        output_path = "{0}_output".format(self.src)
+        output_path = "{0}_build".format(self.src)
 
         embeddings_path = path.join(output_path, "{0}.che".format(self.configuration['model']['model_name']))
         scaler_path = path.join(output_path, "{0}.chs".format(self.configuration['model']['model_name']))

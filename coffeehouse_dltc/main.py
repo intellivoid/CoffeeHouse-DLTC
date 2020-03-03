@@ -30,10 +30,10 @@ class DLTC(object):
         if not os.path.exists(model_directory):
             raise FileNotFoundError("The model directory does not exist")
 
-        embeddings_path = os.path.join(model_directory, "{0}.che".format(os.path.basename(model_directory[:-7])))
-        scaler_path = os.path.join(model_directory, "{0}.chs".format(os.path.basename(model_directory[:-7])))
-        model_file_path = os.path.join(model_directory, "{0}.chm".format(os.path.basename(model_directory[:-7])))
-        labels_file_path = os.path.join(model_directory, "{0}.chl".format(os.path.basename(model_directory[:-7])))
+        embeddings_path = os.path.join(model_directory, "{0}.che".format(os.path.basename(model_directory[:-6])))
+        scaler_path = os.path.join(model_directory, "{0}.chs".format(os.path.basename(model_directory[:-6])))
+        model_file_path = os.path.join(model_directory, "{0}.chm".format(os.path.basename(model_directory[:-6])))
+        labels_file_path = os.path.join(model_directory, "{0}.chl".format(os.path.basename(model_directory[:-6])))
 
         if not os.path.exists(embeddings_path):
             raise FileNotFoundError("The embeddings model was not found ('{0}')".format(embeddings_path))
