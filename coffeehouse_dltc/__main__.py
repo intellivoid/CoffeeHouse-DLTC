@@ -25,7 +25,7 @@ def _help_menu(argv=None):
 def _model_info(argv=None):
     directory_structure_input = os.path.join(os.getcwd(), argv[2])
 
-    if os.path.exists(directory_structure_input):
+    if not os.path.exists(directory_structure_input):
         print("\nERROR: The directory '{0}' does not exist".format(directory_structure_input))
         sys.exit()
 
