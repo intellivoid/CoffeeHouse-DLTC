@@ -126,6 +126,8 @@ class Configuration(object):
         dltc.train(
             path.join(directory_structure, 'model_data'),
             self.classifier_labels(),
+            nn_model=self.configuration['training_properties']['architecture'],
+            batch_size=self.configuration['training_properties']['batch_size'],
             epochs=self.configuration['training_properties']['epoch'],
             test_ratio=self.configuration['training_properties']['test_ratio'],
             verbose=2

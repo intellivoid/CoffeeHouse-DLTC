@@ -24,15 +24,18 @@ formatted like this
         "description": "Model for predicting messages which contains spam or ham"
     },
     "training_properties":{
-        "epoch": 5,
+        "epoch": 35,
         "vec_dim": 100,
-        "test_ratio": 0.2
+        "test_ratio": 0.2,
+        "architecture": "cnn",
+        "batch_size": 64
     },
     "classification": [
         {"l": "spam", "f": "spam.dat"},
         {"l": "ham", "f": "ham.dat"}
     ]
 }
+
  ```
 
 ### Model
@@ -53,6 +56,8 @@ formatted like this
 | epoch         | The amount of training sessions the model must run through                                                                                                                                                            |
 | vec_dim       | The amount of word vector recreations it goes through                                                                                                                                                                 |
 | test_ratio    | splits data into train & test datasets and evaluates itself after every epoch displaying it's current loss and accuracy. The default value of  `test_ratio` is 0 meaning that all the data will be used for training. |
+| architecture  | The type of model to train on, the possible values are `cnn` and `rnn`                                                                                                                                                |
+| batch_size    | The size of the batch for training purposes                                                                                                                                                                           |
 
 ### Classification
 
