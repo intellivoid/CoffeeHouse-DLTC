@@ -1,6 +1,7 @@
 from .main import DLTC
 
 def _real_main(argv=None):
+    print(argv)
     print("Running from main")
 
 def main(argv=None):
