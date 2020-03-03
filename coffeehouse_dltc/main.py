@@ -36,16 +36,16 @@ class DLTC(object):
         labels_file_path = os.path.join(model_directory, "{0}.chl".format(os.path.basename(model_directory[:-7])))
 
         if not os.path.exists(embeddings_path):
-            raise FileNotFoundError("The embeddings model was not found (.che)")
+            raise FileNotFoundError("The embeddings model was not found ('{0}')".format(embeddings_path))
 
         if not os.path.exists(scaler_path):
-            raise FileNotFoundError("The scaler model was not found (.chs)")
+            raise FileNotFoundError("The scaler model was not found ('{0}')".format(scaler_path))
 
         if not os.path.exists(model_file_path):
-            raise FileNotFoundError("The classification model was not found (.chm)")
+            raise FileNotFoundError("The classification model was not found ('{0}')".format(model_file_path))
 
         if not os.path.exists(labels_file_path):
-            raise FileNotFoundError("The labels file was not found (.chl)")
+            raise FileNotFoundError("The labels file was not found ('{0}')".format(labels_file_path))
 
         # Read the labels file
         with open(labels_file_path, 'r') as f:
