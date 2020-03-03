@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from __future__ import unicode_literals
 from coffeehouse_dltc.chmodel.configuration import Configuration
-import sys, getopt
+import sys
 import os
 
 
@@ -23,7 +23,7 @@ def _help_menu(argv=None):
 
 
 def _model_info(argv=None):
-    directory_structure_input = argv[2]
+    directory_structure_input = os.path.join(os.getcwd(), argv[2])
 
     if os.path.exists(directory_structure_input):
         print("\nERROR: The directory '{0}' does not exist".format(directory_structure_input))
