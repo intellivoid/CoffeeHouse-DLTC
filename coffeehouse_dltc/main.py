@@ -192,7 +192,7 @@ class DLTC(object):
         :return: list of labels with corresponding confidence intervals
         """
         doc = Document(0, filepath)
-        return self._predict(doc)
+        return dict(self._predict(doc))
 
     def predict_from_text(self, text):
         """
@@ -201,7 +201,7 @@ class DLTC(object):
         :return: list of labels with corresponding confidence intervals
         """
         doc = Document(0, None, text=text)
-        return self._predict(doc)
+        return dict(self._predict(doc))
 
     def _predict(self, doc):
         """
