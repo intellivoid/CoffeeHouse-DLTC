@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from __future__ import unicode_literals
 from coffeehouse_dltc.chmodel.configuration import Configuration
-import sys
+import sys, getopt
 import os
 
 
@@ -15,19 +15,15 @@ def _real_main(argv=None):
 def _help_menu(argv=None):
     print(
         "CoffeeHouse DLTC CLI\n\n"
-        "   --model-info -i <directory_structure_input>"
-        "   --train-model -i <directory_structure_input> -o <output_directory>"
-        "   --test-model -i <model_directory>"
+        "   --model-info <directory_structure_input>"
+        "   --train-model <directory_structure_input> <output_directory>"
+        "   --test-model <model_directory>"
     )
     sys.exit()
 
 
 def _model_info(argv=None):
-    directory_structure_input = None
-
-    for opt, arg in argv:
-        if opt in "-i":
-            directory_structure_input = arg
+    directory_structure_input = argv[2]
 
     if os.path.exists(directory_structure_input):
         print("\nERROR: The directory '{0}' does not exist".format(directory_structure_input))
