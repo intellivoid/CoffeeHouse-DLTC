@@ -1,5 +1,4 @@
 from coffeehouse_dltc.chmodel.configuration import Configuration
-from .main import DLTC
 import sys
 import os
 
