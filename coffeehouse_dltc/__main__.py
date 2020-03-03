@@ -10,17 +10,32 @@ def _real_main(argv=None):
         _help_menu(argv)
     if argv[1] == '--model-info':
         _model_info(argv)
+    if argv[1] == '--train-model':
+        _train_model(argv)
 
 
 def _help_menu(argv=None):
     print(
         "CoffeeHouse DLTC CLI\n\n"
-        "   --model-info <directory_structure_input>"
-        "   --train-model <directory_structure_input> <output_directory>"
-        "   --test-model <model_directory>"
+        "   --model-info <directory_structure_input>\n"
+        "   --train-model <directory_structure_input>\n"
+        "   --test-model <model_directory>\n"
     )
     sys.exit()
 
+
+def _train_model(argv=None):
+    directory_structure_input = os.path.join(os.getcwd(), argv[2])
+
+    if not os.path.exists(directory_structure_input):
+        print("\nERROR: The directory '{0}' does not exist".format(directory_structure_input))
+        sys.exit()
+
+    configuration = Configuration(directory_structure_input)
+    _model_info(argv)
+
+    print("\n\n----- Model Training Started -----\n")
+    configuration.train_model()
 
 def _model_info(argv=None):
     directory_structure_input = os.path.join(os.getcwd(), argv[2])
