@@ -7,6 +7,12 @@ import os
 
 
 def _real_main(argv=None):
+    """
+    The main command-line processor
+
+    :param argv:
+    :return:
+    """
     if argv[1] == '--help':
         _help_menu(argv)
     if argv[1] == '--model-info':
@@ -18,6 +24,12 @@ def _real_main(argv=None):
 
 
 def _help_menu(argv=None):
+    """
+    Displays the help menu and commandline usage
+
+    :param argv:
+    :return:
+    """
     print(
         "CoffeeHouse DLTC CLI\n\n"
         "   --model-info <directory_structure_input>\n"
@@ -28,6 +40,13 @@ def _help_menu(argv=None):
 
 
 def _test_model(argv=None):
+    """
+    Tests the model's prediction by allowing user input and displaying the
+    prediction output
+
+    :param argv:
+    :return:
+    """
     directory_model_input = os.path.join(os.getcwd(), argv[2])
 
     if not os.path.exists(directory_model_input):
@@ -45,6 +64,12 @@ def _test_model(argv=None):
 
 
 def _train_model(argv=None):
+    """
+    Trains the model from the source directory
+
+    :param argv:
+    :return:
+    """
     directory_structure_input = os.path.join(os.getcwd(), argv[2])
 
     if not os.path.exists(directory_structure_input):
@@ -59,6 +84,12 @@ def _train_model(argv=None):
 
 
 def _model_info(argv=None):
+    """
+    Displays information about the model and the training configurations
+
+    :param argv:
+    :return:
+    """
     directory_structure_input = os.path.join(os.getcwd(), argv[2])
 
     if not os.path.exists(directory_structure_input):

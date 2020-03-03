@@ -4,7 +4,6 @@ import math
 import os
 import sys
 import json
-from six import string_types
 
 import keras.models
 import numpy as np
@@ -21,31 +20,50 @@ from coffeehouse_dltc.utils import save_to_disk, load_from_disk
 class DLTC(object):
 
     def __init__(self):
+        """
+        Public Constructor
+        """
         self.labels = None
         self.keras_model = None
         self.word2vec_model = None
         self.scaler = None
 
     def load_model_cluster(self, model_directory):
+        """
+        Loads the model cluster into memory in which the model can be used
+         to be predicted from
+
+        :param model_directory: The directory which contains the model
+        files such as .che, .chs, .chm and .chl
+        :return: None
+        """
         if not os.path.exists(model_directory):
             raise FileNotFoundError("The model directory does not exist")
 
-        embeddings_path = os.path.join(model_directory, "{0}.che".format(os.path.basename(model_directory[:-6])))
-        scaler_path = os.path.join(model_directory, "{0}.chs".format(os.path.basename(model_directory[:-6])))
-        model_file_path = os.path.join(model_directory, "{0}.chm".format(os.path.basename(model_directory[:-6])))
-        labels_file_path = os.path.join(model_directory, "{0}.chl".format(os.path.basename(model_directory[:-6])))
+        embeddings_path = os.path.join(model_directory, "{0}.che".
+                                       format(os.path.basename(model_directory[:-6])))
+        scaler_path = os.path.join(model_directory, "{0}.chs".
+                                   format(os.path.basename(model_directory[:-6])))
+        model_file_path = os.path.join(model_directory, "{0}.chm".
+                                       format(os.path.basename(model_directory[:-6])))
+        labels_file_path = os.path.join(model_directory, "{0}.chl".
+                                        format(os.path.basename(model_directory[:-6])))
 
         if not os.path.exists(embeddings_path):
-            raise FileNotFoundError("The embeddings model was not found ('{0}')".format(embeddings_path))
+            raise FileNotFoundError("The embeddings model was not found ('{0}')".
+                                    format(embeddings_path))
 
         if not os.path.exists(scaler_path):
-            raise FileNotFoundError("The scaler model was not found ('{0}')".format(scaler_path))
+            raise FileNotFoundError("The scaler model was not found ('{0}')".
+                                    format(scaler_path))
 
         if not os.path.exists(model_file_path):
-            raise FileNotFoundError("The classification model was not found ('{0}')".format(model_file_path))
+            raise FileNotFoundError("The classification model was not found ('{0}')".
+                                    format(model_file_path))
 
         if not os.path.exists(labels_file_path):
-            raise FileNotFoundError("The labels file was not found ('{0}')".format(labels_file_path))
+            raise FileNotFoundError("The labels file was not found ('{0}')".
+                                    format(labels_file_path))
 
         # Read the labels file
         with open(labels_file_path, 'r') as f:

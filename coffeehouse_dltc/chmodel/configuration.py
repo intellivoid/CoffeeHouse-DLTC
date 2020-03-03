@@ -9,9 +9,15 @@ from coffeehouse_dltc import DLTC
 class Configuration(object):
 
     def __init__(self, src_directory):
+        """
+        Public Constructor
+
+        :param src_directory:
+        """
         self.src = src_directory
         if not path.exists(src_directory):
-            raise FileNotFoundError("The source directory '{0}' was not found".format(src_directory))
+            raise FileNotFoundError("The source directory '{0}' was not found".
+                                    format(src_directory))
 
         self.configuration_file = path.join(self.src, "model.json")
         if not path.exists(self.configuration_file):
@@ -27,9 +33,17 @@ class Configuration(object):
 
         self.classifications = {}
         for classification_method in self.configuration['classification']:
-            self.classifications[classification_method['l']] = path.join(self.src, classification_method['f'])
+            self.classifications[classification_method['l']] = path.join(
+                self.src, classification_method['f']
+            )
 
     def classifier_range(self, classification_name):
+        """
+        Determines the range of the classifier
+
+        :param classification_name:
+        :return: Integer of the amount of data the classifier contains
+        """
         if classification_name in self.classifications:
             with open(self.classifications[classification_name], 'r', encoding="utf8") as f:
                 for i, l in enumerate(f):
@@ -37,23 +51,41 @@ class Configuration(object):
             return i + 1
         else:
             raise ValueError(
-                "The classification label '{0}' is not defined in the configuration".format(classification_name))
+                "The classification label '{0}' is not defined in the configuration".format(
+                    classification_name))
 
     def classifier_contents(self, classification_name):
+        """
+        Returns the contents of the classifier
+
+        :param classification_name:
+        :return: Contents of the classifier split into a list type
+        """
         if classification_name in self.classifications:
             with open(self.classifications[classification_name], 'r', encoding="utf8") as f:
                 return f.read().splitlines()
         else:
             raise ValueError(
-                "The classification label '{0}' is not defined in the configuration".format(classification_name))
+                "The classification label '{0}' is not defined in the configuration".format(
+                    classification_name))
 
     def classifier_labels(self):
+        """
+         Returns list of labels that this model is configured to use based on the classifier data
+
+        :return: List of labels
+        """
         classifier_labels = []
         for classifier_name, classifier_data_file in self.classifications.items():
             classifier_labels.append(classifier_name)
         return classifier_labels
 
     def create_structure(self):
+        """
+        Creates the model structure which allows training to be simplified
+
+        :return: the path of the directory containing the model structure
+        """
         print("Preparing structure directory")
         temporary_path = "{0}_data".format(self.src)
         if path.exists(temporary_path):
@@ -94,6 +126,12 @@ class Configuration(object):
         return temporary_path
 
     def train_model(self):
+        """
+        Starts the process of training the model by creating a model structure
+        and creating the necessary models for classification
+
+        :return: None
+        """
         directory_structure = self.create_structure()
 
         print("Preparing output directory")
