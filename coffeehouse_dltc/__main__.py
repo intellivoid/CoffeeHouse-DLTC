@@ -36,7 +36,7 @@ def _model_info(argv=None):
         "   Author          : {1}\n"
         "   Version         : {2}\n"
         "   Description     : {3}\n"
-        "--------------------------------------------"
+        "---------------------------------------\n"
         "   EPOCH           : {4}\n"
         "   VEC_DIM         : {5}\n"
         "   TEST_RATIO      : {6}\n"
