@@ -1,7 +1,7 @@
 from coffeehouse_dltc.main import DLTC
 
 dltc = DLTC()
-dltc.load_model('spam_ham_output')
+dltc.load_model_cluster('spam_ham_output')
 
 while True:
     input_text = input("Input: ")

@@ -26,7 +26,7 @@ class DLTC(object):
         self.word2vec_model = None
         self.scaler = None
 
-    def load_model(self, model_directory):
+    def load_model_cluster(self, model_directory):
         if not os.path.exists(model_directory):
             raise FileNotFoundError("The model directory does not exist")
 
@@ -34,10 +34,6 @@ class DLTC(object):
         scaler_path = os.path.join(model_directory, "{0}.chs".format(os.path.basename(model_directory)))
         model_file_path = os.path.join(model_directory, "{0}.chm".format(os.path.basename(model_directory)))
         labels_file_path = os.path.join(model_directory, "{0}.chl".format(os.path.basename(model_directory)))
-        print(embeddings_path)
-        print(scaler_path)
-        print(model_file_path)
-        print(labels_file_path)
 
         if not os.path.exists(embeddings_path):
             raise FileNotFoundError("The embeddings model was not found (.che)")
