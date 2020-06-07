@@ -16,7 +16,7 @@ setup(
         'Programming Language :: Python :: 3',
     ],
     keywords='multi-label classification nlp neural networks deep learning',
-    packages=find_packages(exclude=['tests']),
+    packages=find_packages(),
     install_requires=[
         'nltk',
         'numpy~=1.17',

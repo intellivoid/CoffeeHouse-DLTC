@@ -9,6 +9,12 @@ the model will be able to predict the likely-hood of the article being Political
 This was forked from [magpie](https://github.com/inspirehep/magpie) but rewritten to handle data
 and the training process more quickly and efficiently than the original project. 
 
+# Installation
+
+```shell script
+python3 setup.py install
+```
+
 # Usage
 
 Create a directory for your model, your directory must contain a model.json file
@@ -110,4 +116,15 @@ dltc.predict_from_text("Hello World")
 
 dltc.predict_from_file("text.txt")
 # [('spam', 0.61647576), ('ham', 0.42338383)]
+```
+
+
+## From the CLI
+
+You can access CoffeeHouse-DLTC's features from the command-line interface.
+
+```shell script
+python3 -m coffeehouse_dltc --model-info <source directory>
+python3 -m coffeehouse_dltc --train-model <source directory>
+python3 -m coffeehouse_dltc --test-model <built model directory>
 ```
