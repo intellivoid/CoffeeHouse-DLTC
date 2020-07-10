@@ -238,6 +238,7 @@ class DLTC(object):
         for i, w in enumerate(words):
             if w in self.word2vec_model.wv:
                 word_vector = self.word2vec_model.wv[w].reshape(1, -1)
+                self.scaler.fit(word_vector)
                 scaled_vector = self.scaler.transform(word_vector, copy=True)[0]
                 x_matrix[doc.doc_id][i] = scaled_vector
 
