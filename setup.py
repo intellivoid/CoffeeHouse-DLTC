@@ -22,7 +22,7 @@ setup(
         'numpy~=1.17',
         'scipy~=1.3.1',
         'gensim~=3.8.0',
-        'scikit-learn',
+        'scikit-learn==0.22.0',
         'keras~=2.2.5',
         'h5py~=2.9',
         'tensorflow~=1.14.0',
